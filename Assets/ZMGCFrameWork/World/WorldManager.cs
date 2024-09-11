@@ -29,9 +29,18 @@ public class WorldManager
         DefaultGameWorld = world;
         
         //初始化当前游戏世界的程序集脚本
-        
+        TypeManager.InitlizateWorldAssemblies(world, GetBehaviourExecution(world));
         world.OnCreate();
         _worldList.Add(world);
+    }
+    
+    public static IBehaviourExecution GetBehaviourExecution(World world)
+    {
+        if (world.GetType().Name == "HallWorld")
+        {
+            return new HallWorldScriptExecutionOrder();
+        }
+        return null;
     }
 
     public static void DestroyWorld<T>(World world) where T : World
