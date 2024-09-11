@@ -2,17 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldManager : MonoBehaviour
+public class WorldManager
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    /// <summary>
+    /// 游戏世界列表
+    /// </summary>
+    private static List<World> _worldList = new List<World>();
+
+    /// <summary>
+    /// 默认游戏世界
+    /// </summary>
+    public static World DefaultGameWorld
     {
+        get;
+        private set;
+    }
+    
+    /// <summary>
+    /// 构建一个游戏世界
+    /// </summary>
+    /// <typeparam name="T">游戏世界类型</typeparam>
+    public static void CreateWorld<T>() where T: World, new()
+    {
+        T world = new T();
+        DefaultGameWorld = world;
         
+        //初始化当前游戏世界的程序集脚本
+        
+        world.OnCreate();
+        _worldList.Add(world);
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void DestroyWorld<T>(World world) where T : World
     {
-        
+        for (int i = 0; i < _worldList.Count; i++)
+        {
+            if(_worldList[i] == world)
+            {
+                _worldList[i].DestroyWorld(typeof(T).Namespace);
+                _worldList.Remove(_worldList[i]);
+                break;
+            }
+        }
     }
 }

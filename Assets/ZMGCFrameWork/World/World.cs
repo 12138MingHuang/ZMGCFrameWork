@@ -32,6 +32,65 @@ public partial class World
     public virtual void OnDestroy(){}
 
     /// <summary>
+    /// 销毁游戏世界
+    /// </summary>
+    /// <param name="nameSpace">命名空间</param>
+    /// <param name="pars">可选参数</param>
+    public void DestroyWorld(string nameSpace, object pars = null)
+    {
+        //需要移除的一个列表
+        List<string> needRemoveList = new List<string>();
+
+        //释放逻辑层脚本
+        foreach (var item in _logicBehaviourDic)
+        {
+            if (string.Equals(item.Value.GetType().Namespace, nameSpace))
+            {
+                needRemoveList.Add(item.Key);
+            }
+        }
+        foreach (var item in needRemoveList)
+        {
+            _logicBehaviourDic[item].OnDestroy();
+            _logicBehaviourDic.Remove(item);
+        }
+
+        //释放数据层脚本
+        needRemoveList.Clear();
+        foreach (var item in _dataBehaviourDic)
+        {
+            if (string.Equals(item.Value.GetType().Namespace, nameSpace))
+            {
+                needRemoveList.Add(item.Key);
+            }
+        }
+        foreach (var item in needRemoveList)
+        {
+            _dataBehaviourDic[item].OnDestroy();
+            _dataBehaviourDic.Remove(item);
+        }
+        
+        //释放消息层脚本
+        needRemoveList.Clear();
+        foreach (var item in _msgBehaviourDic)
+        {
+            if (string.Equals(item.Value.GetType().Namespace, nameSpace))
+            {
+                needRemoveList.Add(item.Key);
+            }
+        }
+        foreach (var item in needRemoveList)
+        {
+            _msgBehaviourDic[item].OnDestroy();
+            _msgBehaviourDic.Remove(item);
+        }
+        
+        OnDestroy();
+        
+        OnDestroyPostProcess(pars);
+    }
+
+    /// <summary>
     /// 世界销毁完成后触发
     /// </summary>
     /// <param name="args"></param>
