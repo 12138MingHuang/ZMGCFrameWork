@@ -8,7 +8,7 @@ using ZMGC.Hall;
 public class GameMain : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         WorldManager.CreateWorld<HallWorld>();
         HallWorld.GetExitsLogicCtrl<HallLogicCtrl>().Test();
