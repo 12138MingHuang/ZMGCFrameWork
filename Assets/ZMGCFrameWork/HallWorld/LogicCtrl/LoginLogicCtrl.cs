@@ -26,6 +26,7 @@ namespace ZMGC.Hall
             userData.CacheUserData(user);
             
             //通过时间发送到UI层，让UI去更新界面
+            UIEventControl.DispensEvent(UIEventEnum.LoginSuccess);
             Debug.Log("登录成功 userId:" + user.id + " userName:" + user.name + " userGold:" + user.gold);
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,12 +15,22 @@ public class LoginWindow : MonoBehaviour
     {
         _loginLogic = HallWorld.GetExitsLogicCtrl<LoginLogicCtrl>();
     }
-    
-    void Update()
+
+    private void OnEnable()
     {
-        
+        UIEventControl.AddEvent(UIEventEnum.LoginSuccess, OnLoginSuccess);
     }
 
+    private void OnDisable()
+    {
+        UIEventControl.RemoveEvent(UIEventEnum.LoginSuccess, OnLoginSuccess);
+    }
+
+    private void OnLoginSuccess(object data)
+    {
+        Debug.Log("登录成功");
+    }
+    
     public void LoginButtonClick()
     {
         int result = _loginLogic.AccountLogin(accountInput.text, passwordInput.text);
