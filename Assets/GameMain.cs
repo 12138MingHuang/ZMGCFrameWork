@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ZMGC.Battle;
 using ZMGC.Hall;
 
 public class GameMain : MonoBehaviour
@@ -17,7 +18,14 @@ public class GameMain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            WorldManager.CreateWorld<BattleWorld>();
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            WorldManager.DestroyWorld<BattleWorld>();
+        }
     }
 
     private void OnApplicationQuit()

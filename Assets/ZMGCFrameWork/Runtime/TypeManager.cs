@@ -103,6 +103,7 @@ public class TypeManager
     
     private static int GetLogicBehaviourOrderIndex(Type type)
     {
+        if (_behaviourExecution == null) return 999;
         Type[] logicTypes = _behaviourExecution.GetLogicBehaviourExecution();
         for (int i = 0; i < logicTypes.Length; i++)
         {
@@ -116,6 +117,7 @@ public class TypeManager
 
     private static int GetDataBehaviourOrderIndex(Type type)
     {
+        if (_behaviourExecution == null) return 999;
         Type[] dataTypes = _behaviourExecution.GetDataBehaviourExecution();
         for (int i = 0; i < dataTypes.Length; i++)
         {
@@ -129,6 +131,7 @@ public class TypeManager
 
     private static int GetMsgBehaviourOrderIndex(Type type)
     {
+        if (_behaviourExecution == null) return 999;
         Type[] msgTypes = _behaviourExecution.GetMsgBehaviourExecution();
         for (int i = 0; i < msgTypes.Length; i++)
         {
