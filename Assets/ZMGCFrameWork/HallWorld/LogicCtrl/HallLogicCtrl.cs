@@ -15,6 +15,10 @@ namespace ZMGC.Hall
         {
             Debug.Log("HallLogicCtrl OnDestroy>>>");
         }
+        public void Test()
+        {
+            Debug.Log("HallLogicCtrl Test>>>");
+        }
     }
 }
 

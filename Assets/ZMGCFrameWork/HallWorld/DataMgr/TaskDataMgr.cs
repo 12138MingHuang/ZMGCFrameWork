@@ -13,5 +13,9 @@ namespace ZMGC.Hall
         {
             Debug.Log("TaskDataMgr OnDestroy>>>");
         }
+        public void Test()
+        {
+            Debug.Log("TaskDataMgr Test>>>");
+        }
     }
 }

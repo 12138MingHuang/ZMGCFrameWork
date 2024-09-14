@@ -43,11 +43,11 @@ public class WorldManager
         return null;
     }
 
-    public static void DestroyWorld<T>(World world) where T : World
+    public static void DestroyWorld<T>() where T : World
     {
         for (int i = 0; i < _worldList.Count; i++)
         {
-            if(_worldList[i] == world)
+            if(_worldList[i].GetType().Name == typeof(T).Name)
             {
                 _worldList[i].DestroyWorld(typeof(T).Namespace);
                 _worldList.Remove(_worldList[i]);

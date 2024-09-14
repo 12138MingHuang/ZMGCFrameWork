@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +10,18 @@ public class GameMain : MonoBehaviour
     void Start()
     {
         WorldManager.CreateWorld<HallWorld>();
+        HallWorld.GetExitsLogicCtrl<HallLogicCtrl>().Test();
+        HallWorld.GetExitsDataMgr<TaskDataMgr>().Test();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void OnApplicationQuit()
+    {
+        WorldManager.DestroyWorld<HallWorld>();
     }
 }
